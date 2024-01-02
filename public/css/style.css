@@ -1,0 +1,60 @@
+.login-form .card-body {
+    background-color: #00adff !important;
+}
+.login-form h3.card-header.text-center {
+    background-color: #83b983;
+}
+
+.signup-form h3.card-header.text-center {
+    background-color: #b97070;
+}
+.signup-form .card-body {
+    background-color: darkgray;
+}
+.antialiased a.text-sm.text-gray-700.dark\:text-gray-500.underline {
+    font-size: 38px;
+    font-weight: 700;
+    background-color: red;
+    padding: 5px 15px !important;
+}
+
+section.all-posts-wrap {
+    margin: 30px 0 30px 0;
+    border: 10px solid black;
+    border-radius: 12px;
+    padding: 18px;
+}
+section.all-posts-wrap .container > h2 {
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 35px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+/* Create two equal columns that floats next to each other */
+.all-posts-wrap .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    border: 2px solid;
+  }
+  
+  /* Clear floats after the columns */
+  .all-posts-wrap .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .all-posts-wrap .column a {
+    color: #0e0e0e;
+    text-decoration: none;
+}
+.dashboard-top-sec-wrap .top-btns{
+    display: flex;
+}
+.dashboard-top-sec-wrap .top-btns .add-btn{
+    padding: 0px 10px 0px 0px;
+}
+.single-post-wrap .col-md-12 {
+    margin: 30px 0px 0px 0px;
+}
