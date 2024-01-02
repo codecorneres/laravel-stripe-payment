@@ -3,20 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Stripe\Stripe;
-use Stripe\Charge;
-
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Arr;
-use Input;
-use App\User;
-use Stripe\Error\Card;
 use Cartalyst\Stripe\Stripe;
-use Cartalyst\Stripe\Api\Charges;
-
 
 class MoneySetupController extends Controller
 {
@@ -34,9 +24,7 @@ class MoneySetupController extends Controller
         ]);
       
         $input = $request->all();
-        //if ($validator->passes()) {
-               
-      //  }
+
         if ($validator->fails()) {
             return redirect()->route('paymentStripe')
                 ->withErrors($validator)
@@ -44,13 +32,11 @@ class MoneySetupController extends Controller
         }
         else{
             $input = Arr::except($input,array('password'));//array_except($input,array('_token'));
-            //print_r($input);
            
             try {
                 $stripe = new Stripe();
                 $stripe->setApiKey(env('STRIPE_SECRET'));
                // $stripe = Stripe::setApiKey(env('STRIPE_SECRET'));
-               // dd($request->get('card_no').','.$request->get('ccExpiryMonth').','.$request->get('ccExpiryYear').','. $request->get('cvvNumber'));
                
                // $token = $stripe->tokens()->create([
                 //     'card' => [
@@ -66,36 +52,42 @@ class MoneySetupController extends Controller
                 //$token = 'tok_visa';
             
                 // $charge = $stripe->charges()->create([
-                //     'card' => $token, //$token['id'], 
+                //     //'card' => $token, //$token['id'], 
                 //     'currency' => 'usd',
                 //     'amount' => 2049,
-                //      'source' => 'tok_visa',
+                //     //'source' => $token,
                 //     'description' => 'Test charge',
                 // ]);
                 
+                //  $charge = $stripe->charges()->create([
+                // //$charge =  \Stripe\Charge::create([
+                //     'amount' => 2000, 
+                //     'currency' => 'inr',
+                //     'source' => 'tok_in',
+                //     'description' => 'Test Charge',
+                // ]);
 
                 $charge = $stripe->paymentIntents()->create([
-                    'amount' => 500,
-                    'currency' => 'usd',
-                    'payment_method' => 'pm_card_visa',
+                    'amount' => 100,
+                    'currency' => 'inr',
+                    'payment_method' => 'pm_card_in',
                     'description' => 'Test charge',
                   ]);
-                // Log or handle the response
-               // dd($charge);
+
                $confirm = $stripe->paymentIntents()->confirm(
                 $charge['id'],
                 [
-                  'payment_method' => 'pm_card_visa',
+                  'payment_method' => 'pm_card_in',
                 ]
               );
-
-                //if ($confirm['status'] == 'requires_confirmation') {
+        
                 if ($confirm['status'] == 'succeeded') {
                     //echo "<pre>";print_r($charge);exit();
-                //     return redirect()->route('paymentStripe')->with('status','Payment Requires confirmation...');
-                // } else if($charge['status'] == 'succeeded'){
                     return redirect()->route('paymentStripe')->with('status','Payment succeeded...');
+                } else if ($confirm->status == 'requires_source_action' && $confirm->next_action->type == 'use_stripe_sdk'){
+                    return redirect()->route('paymentStripe')->with('status','Payment2 succeeded...');
                 } else {
+                   // echo "<pre>";print_r($charge);exit();
                     Session::put('error', 'Money not add in the wallet!!');
                     return redirect()->route('paymentStripe');
                 }
