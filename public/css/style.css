@@ -58,3 +58,17 @@ section.all-posts-wrap .container > h2 {
 .single-post-wrap .col-md-12 {
     margin: 30px 0px 0px 0px;
 }
+/* ===== Stripe form CSS ========= */
+.submit-button {
+    margin-top: 10px;
+}
+.form-horizontal .form-group {
+    margin-right: 0px !important;
+}
+.card{
+    display: inline !important;
+    border: none !important; 
+    border-radius: none !important;
+}
+
+/* ======== End ========= */

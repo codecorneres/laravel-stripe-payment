@@ -47,27 +47,24 @@ class MoneySetupController extends Controller
                 //     ],
                 // ]);
                 
-                //dd($token.'----34');
-               
-                //$token = 'tok_visa';
-            
-                // $charge = $stripe->charges()->create([
-                //     //'card' => $token, //$token['id'], 
-                //     'currency' => 'usd',
-                //     'amount' => 2049,
-                //     //'source' => $token,
-                //     'description' => 'Test charge',
-                // ]);
-                
                 //  $charge = $stripe->charges()->create([
-                // //$charge =  \Stripe\Charge::create([
+                //     //'card' => 'tok_visa', //$token['id'], 
                 //     'amount' => 2000, 
                 //     'currency' => 'inr',
                 //     'source' => 'tok_in',
                 //     'description' => 'Test Charge',
                 // ]);
 
-                $charge = $stripe->paymentIntents()->create([
+                // if ($charge['status'] == 'succeeded') {
+                //     //echo "<pre>";print_r($charge);exit();
+                //     return redirect()->route('paymentStripe')->with('status','Payment succeeded...');
+                // } else {
+                //    // echo "<pre>";print_r($charge);exit();
+                //     Session::put('error', 'Money not add in the wallet!!');
+                //     return redirect()->route('paymentStripe');
+                // }
+
+                $paymentIntents = $stripe->paymentIntents()->create([
                     'amount' => 100,
                     'currency' => 'inr',
                     'payment_method' => 'pm_card_in',
@@ -75,11 +72,11 @@ class MoneySetupController extends Controller
                   ]);
 
                $confirm = $stripe->paymentIntents()->confirm(
-                $charge['id'],
-                [
-                  'payment_method' => 'pm_card_in',
-                ]
-              );
+                $paymentIntents['id'],
+                    [
+                    'payment_method' => 'pm_card_in',
+                    ]
+                );
         
                 if ($confirm['status'] == 'succeeded') {
                     //echo "<pre>";print_r($charge);exit();
