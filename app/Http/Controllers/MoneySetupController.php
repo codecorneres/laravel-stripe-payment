@@ -38,22 +38,32 @@ class MoneySetupController extends Controller
                 $stripe->setApiKey(env('STRIPE_SECRET'));
                // $stripe = Stripe::setApiKey(env('STRIPE_SECRET'));
                
-               // $token = $stripe->tokens()->create([
-                //     'card' => [
-                //         'number' =>  $request->get('card_no'), 
-                //         'exp_month' => $request->get('ccExpiryMonth'),
-                //         'exp_year' => $request->get('ccExpiryYear'),
-                //         'cvc' => $request->get('cvvNumber'),
-                //     ],
-                // ]);
+            //    $token = $stripe->tokens()->create([
+            //         'card' => [
+            //             'number' =>  $request->get('card_no'), 
+            //             'exp_month' => $request->get('ccExpiryMonth'),
+            //             'exp_year' => $request->get('ccExpiryYear'),
+            //             'cvc' => $request->get('cvvNumber'),
+            //         ],
+            //     ]);
                 
-                //  $charge = $stripe->charges()->create([
+                // $charge = $stripe->charges()->create([
                 //     //'card' => 'tok_visa', //$token['id'], 
                 //     'amount' => 2000, 
                 //     'currency' => 'inr',
-                //     'source' => 'tok_in',
+                //     'card' => 'tok_in',
                 //     'description' => 'Test Charge',
                 // ]);
+
+                //$token = $_POST['stripeToken'];
+
+                // $charge = $stripe->charges()->create([
+                // 'amount' => 999,
+                // 'currency' => 'usd',
+                // 'description' => 'Testing charge',
+                // 'source' => $token['id'],
+                // ]);
+    
 
                 // if ($charge['status'] == 'succeeded') {
                 //     //echo "<pre>";print_r($charge);exit();
@@ -68,7 +78,7 @@ class MoneySetupController extends Controller
                     'amount' => 100,
                     'currency' => 'inr',
                     'payment_method' => 'pm_card_in',
-                    'description' => 'Test charge',
+                    'description' => 'Test Payment Intents',
                   ]);
 
                $confirm = $stripe->paymentIntents()->confirm(
@@ -80,9 +90,10 @@ class MoneySetupController extends Controller
         
                 if ($confirm['status'] == 'succeeded') {
                     //echo "<pre>";print_r($charge);exit();
-                    return redirect()->route('paymentStripe')->with('status','Payment succeeded...');
+                    return redirect()->route('paymentStripe');
                 } else if ($confirm->status == 'requires_source_action' && $confirm->next_action->type == 'use_stripe_sdk'){
-                    return redirect()->route('paymentStripe')->with('status','Payment2 succeeded...');
+                    // Session::put('success', 'Payment succeeded..');
+                    return redirect()->route('paymentStripe');
                 } else {
                    // echo "<pre>";print_r($charge);exit();
                     Session::put('error', 'Money not add in the wallet!!');
