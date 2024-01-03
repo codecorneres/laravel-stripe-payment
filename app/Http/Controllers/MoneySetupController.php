@@ -36,7 +36,6 @@ class MoneySetupController extends Controller
             try {
                 $stripe = new Stripe();
                 $stripe->setApiKey(env('STRIPE_SECRET'));
-               // $stripe = Stripe::setApiKey(env('STRIPE_SECRET'));
                
             //    $token = $stripe->tokens()->create([
             //         'card' => [
@@ -73,32 +72,36 @@ class MoneySetupController extends Controller
                 //     Session::put('error', 'Money not add in the wallet!!');
                 //     return redirect()->route('paymentStripe');
                 // }
+                
+                echo "<pre>";
+                $stripe = new \Stripe\StripeClient('sk_test_51OPdkJSAgPslsKeucJizC02L5UgbVAzP3XwOo2u7pw6LccD3jwefKWEXVpIi44aNVajyTmy0vOzZsjB52WC0B2r700WzgtsByO');
+                print_r($stripe->products->all(['limit' => 3]));
+                exit();
+            //     $paymentIntents = $stripe->paymentIntents()->create([
+            //         'amount' => 100,
+            //         'currency' => 'inr',
+            //         'payment_method' => 'pm_card_in',
+            //         'description' => 'Test Payment Intents',
+            //       ]);
 
-                $paymentIntents = $stripe->paymentIntents()->create([
-                    'amount' => 100,
-                    'currency' => 'inr',
-                    'payment_method' => 'pm_card_in',
-                    'description' => 'Test Payment Intents',
-                  ]);
-
-               $confirm = $stripe->paymentIntents()->confirm(
-                $paymentIntents['id'],
-                    [
-                    'payment_method' => 'pm_card_in',
-                    ]
-                );
+            //    $confirm = $stripe->paymentIntents()->confirm(
+            //     $paymentIntents['id'],
+            //         [
+            //         'payment_method' => 'pm_card_in',
+            //         ]
+            //     );
         
-                if ($confirm['status'] == 'succeeded') {
-                    //echo "<pre>";print_r($charge);exit();
-                    return redirect()->route('paymentStripe');
-                } else if ($confirm->status == 'requires_source_action' && $confirm->next_action->type == 'use_stripe_sdk'){
-                    // Session::put('success', 'Payment succeeded..');
-                    return redirect()->route('paymentStripe');
-                } else {
-                   // echo "<pre>";print_r($charge);exit();
-                    Session::put('error', 'Money not add in the wallet!!');
-                    return redirect()->route('paymentStripe');
-                }
+            //     if ($confirm['status'] == 'succeeded') {
+            //         //echo "<pre>";print_r($charge);exit();
+            //         return redirect()->route('paymentStripe');
+            //     } else if ($confirm->status == 'requires_source_action' && $confirm->next_action->type == 'use_stripe_sdk'){
+            //         // Session::put('success', 'Payment succeeded..');
+            //         return redirect()->route('paymentStripe');
+            //     } else {
+            //        // echo "<pre>";print_r($charge);exit();
+            //         Session::put('error', 'Money not add in the wallet!!');
+            //         return redirect()->route('paymentStripe');
+            //     }
                 
             } catch (\Exception $e) {
                 //dd($e->getMessage());
