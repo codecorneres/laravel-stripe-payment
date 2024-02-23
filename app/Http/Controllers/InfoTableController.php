@@ -10,7 +10,8 @@ class InfoTableController extends Controller
 {
     public function index(){
         $allData = DB::table('info_table')->get();
-        return view('dashboard.dashboard',compact('allData'));
+        $users = DB::table('users')->get();
+        return view('dashboard.dashboard',compact('allData','users'));
     }
     public function add(){
         return view('dashboard.add');

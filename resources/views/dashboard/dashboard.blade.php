@@ -53,4 +53,31 @@
                 </table>
                 <p>To understand the example better, we have added borders to the table.</p>
             </div>
+
+            <div class="row mt-5">
+                <h2>ALL Users</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">E-Mail</th>
+                        {{-- <th scope="col">Action</th> --}}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $user)
+                        <tr>
+                        <th scope="row">{{ $user->id }}</th>  
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        {{-- <td><a href="{{ url('edit/'.$data->id) }}" class="btn btn-success"> Update </a>
+                        <a href="{{ url('deleteData/'.$data->id) }}" class="btn btn-danger"> Delete </a></td> --}}
+
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <p>All Users Are here in this table....</p>
+            </div>
    @endsection
