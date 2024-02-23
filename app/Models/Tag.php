@@ -12,7 +12,7 @@ class Tag extends Model
     protected $fillable = ['user_id','tag'];
 
     public function user() {
-        return $this->belongsTo(User::class,'user_id','id');
+        return $this->belongsTo(User::class);
     }
 }
 class User extends Model
@@ -22,6 +22,6 @@ class User extends Model
      */
     public function tag()
     {
-        return $this->hasOne(Tag::class,'user_id','id');
+        return $this->hasOne(Tag::class);
     }
 }
