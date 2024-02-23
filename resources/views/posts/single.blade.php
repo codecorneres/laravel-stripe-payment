@@ -15,19 +15,35 @@
         </section>
         <section class="single-post-wrap">
             <div class="row">
-                <form method="post" action="{{ route('edit-post',$post->id) }}" >
+                <form method="post" action="{{ route('edit-post',$post->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
                         <div class="col-md-12 form-group mt-10">
-                            {{-- <label for="name">Post Name</label> --}}
+                    
                             <input type="text" name="name" class="form-control" id="name" placeholder="Enter Post Name" value="{{ $post->name }}">
                         </div>
                         <div class="col-md-12 form-group mt-10">
                             <textarea id="content" name="content" class="form-control" rows="15" cols="127">{{ $post->content }}</textarea>
                         </div>
+                        <div class="col-md-12 form-group">
+                            @if( $post->file != null)
+                                <div class="video-content">
+                                    <label>Uploaded File: {{ $post->file }}</label>
+                                    <video controls>
+                                        <source src="{{ asset('uploads') }}/{{ $post->file }}" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="delete-btn">
+                                    <a href="{{ url('deleteFile/'.$post->id) }}" onclick="return confirm('{{ __('Are you sure you want to remove?') }}')"  class="btn btn-danger">Remove File</a>
+                                </div>
+                            @else
+                                <input type="file" name="file" id="file" accept="image/*,video/*" class="form-control">
+                            @endif
+                        </div>
+                        
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Post Update</button>
+                    <button type="submit" class="btn btn-primary post-update-btn">Post Update</button>
                 </form>
             </div>
         </section>

@@ -41,8 +41,10 @@ Route::get('/single/{id}',[PostsController::class ,'edit'])->name('single');
 Route::put('/edit-post/{id}',[PostsController::class ,'update'])->name('edit-post');
 Route::get('/add_post', [PostsController::class ,'add'])->name('add_post');
 Route::post('/insertPostSuccess', [PostsController::class ,'create'])->name('addedPost');
+Route::get('/deleteFile/{id}', [PostsController::class, 'deleteFile']);
 
 Route::post('/comments', [CommentController::class ,'store'])->name('comment');
+
 
 Route::get('paymentStripe', [MoneySetupController::class ,'paymentStripe'])->name('paymentStripe');
 Route::post('paymentStripe', [MoneySetupController::class ,'postPaymentStripe'])->name('postPaymentStripe');

@@ -8,14 +8,14 @@
     // List View
     function listView() {
         for (i = 0; i < elements.length; i++) {
-            elements[i].style.width = "100%";
+            elements[i].style.width = "96%";
         }
     }
 
     // Grid View
     function gridView() {
         for (i = 0; i < elements.length; i++) {
-            elements[i].style.width = "50%";
+            elements[i].style.width = "46%";
         }
     }
 // ============== end =======

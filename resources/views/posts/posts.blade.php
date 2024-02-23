@@ -21,20 +21,27 @@
             </div>
            
             <section class="all-posts-wrap">
-                <div class="container">
+                <div class="">
                     <!-- Buttons to choose list or grid view -->
                     <button onclick="listView()" class="btn btn-success"><i class="fa fa-bars"></i> List</button>
                     <button onclick="gridView()" class="btn btn-success"><i class="fa fa-th-large"></i> Grid</button>
-                    <h2>All Posts</h2>
+                    <h1>All Posts</h1>
                    
                     <div class="row">
                         @if($allPostsData)
                             @foreach ($allPostsData as $post)
-                                <div class="column" style="background-color:#aaa;">
+                                <div class="column">
                                     <a href="{{ url('single/'.$post->id) }}">
                                         <div class="content"> 
                                             <h2>{{ $post->name }}</h2>
                                             <p>{{ $post->content }}</p>
+                                            
+                                          
+                                            @if( $post->file != null)
+                                                <video controls>
+                                                    <source src="{{ asset('uploads') }}/{{ $post->file }}" type="video/mp4">
+                                                </video>
+                                            @endif
                                         </div>
                                         
                                         @php

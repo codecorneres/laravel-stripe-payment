@@ -11,7 +11,7 @@ class Posts extends Model
 {
     use HasFactory;
     protected $table = "posts";
-    protected $fillable = ['name','content'];
+    protected $fillable = ['name','content','file'];
 
     public function comments() {
        return $this->hasMany(Comment::class, 'post_id','id');
