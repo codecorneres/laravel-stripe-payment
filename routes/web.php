@@ -6,7 +6,7 @@ use App\Http\Controllers\InfoTableController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MoneySetupController;
-
+use App\Http\Controllers\TagController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,5 +48,10 @@ Route::post('/comments', [CommentController::class ,'store'])->name('comment');
 
 Route::get('paymentStripe', [MoneySetupController::class ,'paymentStripe'])->name('paymentStripe');
 Route::post('paymentStripe', [MoneySetupController::class ,'postPaymentStripe'])->name('postPaymentStripe');
+
+//Route::resource('/tags', TagController::class);
+Route::get('tags', [TagController::class, 'index'])->name('tags');
+
+// /tags, /tags/create, /tags (POST), /tags/$ID, /tags/$iD/edit, /tags/$id (PUT), /tags/$id (DELETE)
 
 

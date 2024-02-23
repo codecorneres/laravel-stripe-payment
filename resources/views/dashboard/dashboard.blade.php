@@ -19,65 +19,64 @@
 
                         <div class="all-posts-btn">
                             <a href="{{ route('posts') }}"  class="btn btn-primary">Go All Posts Data</a>
-                            
+                        </div>
+
+                        <div class="all-posts-btn">
+                            <a href="{{ route('tags') }}"  class="btn btn-primary">Go All User Tags</a>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <div class="row">
-                <h2>A Basic CRUD Table</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">E-Mail</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($allData as $data)
-                        <tr>
-                        <th scope="row">{{ $data->id }}</th>  
-                        <td>{{ $data->name }}</td>
-                        <td>{{ $data->email }}</td>
-                        <td>{{ $data->mobile }}</td>
-                        <td><a href="{{ url('edit/'.$data->id) }}" class="btn btn-success"> Update </a>
-                        <a href="{{ url('deleteData/'.$data->id) }}" class="btn btn-danger"> Delete </a></td>
+            <div class="dashboard-tables-wrap">
+                <div class="table-row">
+                    <h2>A Basic CRUD Table</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">E-Mail</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($allData as $data)
+                            <tr>
+                            <th scope="row">{{ $data->id }}</th>  
+                            <td>{{ $data->name }}</td>
+                            <td>{{ $data->email }}</td>
+                            <td>{{ $data->mobile }}</td>
+                            <td><a href="{{ url('edit/'.$data->id) }}" class="btn btn-success"> Update </a>
+                            <a href="{{ url('deleteData/'.$data->id) }}" class="btn btn-danger"> Delete </a></td>
 
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <p>To understand the example better, we have added borders to the table.</p>
-            </div>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <p>To understand the example better, we have added borders to the table.</p>
+                </div>
 
-            <div class="row mt-5">
-                <h2>ALL Users</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">E-Mail</th>
-                        {{-- <th scope="col">Action</th> --}}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
-                        <tr>
-                        <th scope="row">{{ $user->id }}</th>  
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        {{-- <td><a href="{{ url('edit/'.$data->id) }}" class="btn btn-success"> Update </a>
-                        <a href="{{ url('deleteData/'.$data->id) }}" class="btn btn-danger"> Delete </a></td> --}}
-
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <p>All Users Are here in this table....</p>
+                <div class="table-row">
+                    <h2>All Users</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">E-Mail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                            <tr>
+                            <th scope="row">{{ $user->id }}</th>  
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
    @endsection

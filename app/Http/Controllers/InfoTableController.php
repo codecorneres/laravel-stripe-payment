@@ -52,4 +52,5 @@ class InfoTableController extends Controller
         $data->delete();
         return redirect('/dashboard')->with('status','Data Deleted Successfully');
     }
+
 }
