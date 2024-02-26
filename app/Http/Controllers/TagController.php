@@ -19,7 +19,7 @@ class TagController extends Controller
         $tags = Tag::with('user')->get();
         //$tags = DB::table('tag')->get();
         //dd($tags);
-        return view('tags',compact('tags'));
+        return view('tag.tags',compact('tags'));
     }
 
     /**
@@ -29,7 +29,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        view('tags.create');
     }
 
     /**
@@ -51,7 +51,7 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

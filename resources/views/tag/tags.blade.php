@@ -8,9 +8,9 @@
             <div class="add-btn">
                 <a href="{{ route('dashboard') }}"  class="btn btn-primary">Back To Dashboard</a>
             </div>
-            {{-- <div class="add-btn">
-                <a href="{{ route('add_tag') }}"  class="btn btn-primary">Add New User Tag</a>
-            </div> --}}
+            <div class="add-btn">
+                <a href="{{ route('tags.create') }}"  class="btn btn-primary">New Tag</a>
+            </div>
         </div>
     </div>
     <section class="tags-wrap">
@@ -24,7 +24,7 @@
                     <th scope="col">User</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody> 
                     @foreach ($tags as $tag)
                     <tr>
                     <th scope="row">{{ $tag->id }}</th>  

@@ -15,13 +15,4 @@ class Tag extends Model
         return $this->belongsTo(User::class);
     }
 }
-class User extends Model
-{
-    /**
-     * Get the profile associated with the user.
-     */
-    public function tag()
-    {
-        return $this->hasOne(Tag::class);
-    }
-}
+

@@ -49,8 +49,8 @@ Route::post('/comments', [CommentController::class ,'store'])->name('comment');
 Route::get('paymentStripe', [MoneySetupController::class ,'paymentStripe'])->name('paymentStripe');
 Route::post('paymentStripe', [MoneySetupController::class ,'postPaymentStripe'])->name('postPaymentStripe');
 
-//Route::resource('/tags', TagController::class);
-Route::get('tags', [TagController::class, 'index'])->name('tags');
+Route::resource('tags', TagController::class);
+//Route::get('tags', [TagController::class, 'index'])->name('tags');
 
 // /tags, /tags/create, /tags (POST), /tags/$ID, /tags/$iD/edit, /tags/$id (PUT), /tags/$id (DELETE)
 

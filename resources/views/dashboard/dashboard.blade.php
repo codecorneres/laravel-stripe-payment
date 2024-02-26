@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="all-posts-btn">
-                            <a href="{{ route('tags') }}"  class="btn btn-primary">Go All User Tags</a>
+                            <a href="{{ url('/tags') }}"  class="btn btn-primary">Go All User Tags</a>
                         </div>
                     </div>
                 </div>
